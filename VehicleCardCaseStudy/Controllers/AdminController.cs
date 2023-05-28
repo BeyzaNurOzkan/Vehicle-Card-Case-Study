@@ -57,6 +57,14 @@ namespace VehicleCardCaseStudy.Controllers
         }
         public ActionResult VehicleUpdate(int id)
         {
+            List<SelectListItem> list = (from i in vehicleTypeRepository.GetAll().ToList()
+                                         select new SelectListItem
+                                         {
+                                             Text = i.Model,
+                                             Value = i.TypeId.ToString()
+                                         }
+                                        ).ToList();
+            ViewBag.VehicleType = list;
             var update = vehicleRepository.GetById(id);
             return View(update);
         }
