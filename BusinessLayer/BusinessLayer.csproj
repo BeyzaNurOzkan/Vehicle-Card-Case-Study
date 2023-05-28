@@ -56,15 +56,19 @@
   <ItemGroup>
     <Compile Include="Abstract\GenericRepository.cs" />
     <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="Concrete\VehicleRepository.cs" />
+    <Compile Include="Concrete\VehicleTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{3E13FD97-E484-42C1-A7E2-7D26164B3E7B}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityLayer\EntityLayer.csproj">
+      <Project>{da780d98-651d-488b-9638-8097f1c6e8b5}</Project>
+      <Name>EntityLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
