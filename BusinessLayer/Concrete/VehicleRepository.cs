@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Context;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class VehicleRepository:GenericRepository<Vehicle>
+    public class VehicleRepository : GenericRepository<Vehicle>
     {
-
+        
     }
 }

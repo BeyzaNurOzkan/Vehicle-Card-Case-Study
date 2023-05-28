@@ -1,4 +1,4 @@
-﻿
+﻿@model List<EntityLayer.Entities.Vehicle>
 @{
     ViewBag.Title = "Vehicle";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,19 +25,22 @@
                             <th>İşlemler</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Plate</td>
-                            <td>TypeId</td>
-                            <td>ModelYear</td>
-                            <td>Color</td>
-                            <td>
-                                <a href="/Admin/VehicleUpdate/"><button class="btn btn-success" type="button">Düzenle</button></a>
-                                <button class="btn btn-danger" type="button">Sil</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Plate</td>
+                                <td>@item.TypeId</td>
+                                <td>@item.ModelYear</td>
+                                <td>@item.Color</td>
+                                <td>
+                                    <a class="btn btn-primary" href="/Admin/VehicleUpdate/@item.Id">Düzenle</a>
+                                    @Html.ActionLink("Sil", "Delete", new { item.Id }, new {@class="btn btn-danger",onclick="return confirm ('Silmek istediğinize emin misiniz?')"})
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
                 </table>
             </div>
         </div>

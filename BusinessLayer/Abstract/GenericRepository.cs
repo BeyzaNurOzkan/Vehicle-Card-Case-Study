@@ -14,7 +14,10 @@ namespace BusinessLayer.Abstract
     {
         DataContext db= new DataContext();
         DbSet<T> data;
-
+        public GenericRepository()
+        {
+            data=db.Set<T>();
+        }
         public void Add(T entity)
         {
             data.Add(entity);
@@ -39,7 +42,7 @@ namespace BusinessLayer.Abstract
 
         public T GetById(int id)
         {
-            return data.Find();
+            return data.Find(id);
         }
 
         public void Update(T entity)
