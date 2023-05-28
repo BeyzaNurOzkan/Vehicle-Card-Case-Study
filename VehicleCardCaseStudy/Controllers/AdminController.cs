@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Context;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,18 @@ namespace VehicleCardCaseStudy.Controllers
         {
             return View(vehicleRepository.GetAll());
         }
+
         public ActionResult VehicleAdd()
         {
+
+            List<SelectListItem> list = (from i in vehicleTypeRepository.GetAll().ToList()
+                                         select new SelectListItem
+                                         {
+                                              Text=i.Model,
+                                              Value=i.TypeId.ToString()
+                                         }
+                                         ).ToList();
+            ViewBag.VehicleType = list;
             return View();
         }
         [ValidateAntiForgeryToken]
@@ -31,6 +42,7 @@ namespace VehicleCardCaseStudy.Controllers
         {
             if(ModelState.IsValid)
             {
+               
                 vehicleRepository.Add(vehicle);
                 return RedirectToAction("Vehicle");
             }
@@ -73,9 +85,45 @@ namespace VehicleCardCaseStudy.Controllers
         {
             return View();
         }
-        public ActionResult VehicleTypeUpdate()
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult VehicleTypeAdd(VehiclesType vehiclesType)
         {
+            if (ModelState.IsValid)
+            {
+                vehicleTypeRepository.Add(vehiclesType);
+                return RedirectToAction("VehicleType");
+            }
+            ModelState.AddModelError("", "Bir hata oluştu!");
             return View();
+        }
+        public ActionResult VehicleTypeUpdate(int id)
+        {
+            var update = vehicleTypeRepository.GetById(id);
+            return View(update);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult VehicleTypeUpdate(VehiclesType vehiclesType)
+        {
+            if (ModelState.IsValid)
+            {
+                var update = vehicleTypeRepository.GetById(vehiclesType.TypeId);
+                update.Brand = vehiclesType.Brand;
+                update.Model = vehiclesType.Model;
+                update.CapacityM3 = vehiclesType.CapacityM3;
+                update.CapacityKg = vehiclesType.CapacityKg;
+                vehicleTypeRepository.Update(update);
+                return RedirectToAction("VehicleType");
+            }
+            ModelState.AddModelError("", "Bir hata oluştu!");
+            return View();
+        }
+        public ActionResult TypeDelete(int TypeId)
+        {
+            var delete = vehicleTypeRepository.GetById(TypeId);
+            vehicleTypeRepository.Delete(delete);
+            return RedirectToAction("VehicleType");
         }
     }
 }
