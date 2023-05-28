@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <h3 class="page-header"><i class="fa fa-car"></i> Firma Araçları</h3>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="padding-bottom:5px;text-align: right;">
+            <a class="btn btn-success" href="/Admin/VehicleAdd/">Araç Ekle</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive table table-striped">
+                <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Plaka</th>
+                            <th>Tip Id</th>
+                            <th>Model Yılı</th>
+                            <th>Renk</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Plate</td>
+                            <td>TypeId</td>
+                            <td>ModelYear</td>
+                            <td>Color</td>
+                            <td>
+                                <a href="/Admin/VehicleUpdate/"><button class="btn btn-success" type="button">Düzenle</button></a>
+                                <button class="btn btn-danger" type="button">Sil</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
